@@ -1,4 +1,4 @@
-import pickle
+import joblib
 import pandas as pd
 import numpy as np
 from typing import Tuple, Union, List
@@ -104,25 +104,23 @@ class DelayModel:
 
         return [int(pred) for pred in self._model.predict(features)]
     
-    def save_model(self, filename: str = "delay_model.pkl") -> None:
+    def save_model(self, filename: str = "delay_model.joblib") -> None:
         """
-        Guarda el modelo entrenado en un archivo .pkl.
+        Guarda el modelo entrenado en un archivo 
 
         Args:
             filename (str): Nombre del archivo donde se guardará el modelo.
         """
-        with open(filename, "wb") as file:
-            pickle.dump(self, file)
+        joblib.dump(self._model, filename)
 
-    def load_model(self, filename: str = "delay_model.pkl") -> None:
+    def load_model(self, filename: str = "delay_model.joblib") -> None:
         """
-        Carga un modelo desde un archivo .pkl.
+        Carga un modelo desde un archivo 
 
         Args:
             filename (str): nombre del archivo desde donde se cargará el modelo.
         """
-        with open(filename, "rb") as file:
-            self._model = pickle.load(file)
+        self._model = joblib.load(filename)
 
 def main():
     # Inicializa el modelo
