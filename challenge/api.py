@@ -8,7 +8,6 @@ app = FastAPI()
 
 # Carga el modelo
 model = DelayModel()
-model.load_model()
 
 # Lista de tipos de features
 FEATURES_COLS = [

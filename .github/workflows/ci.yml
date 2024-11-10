@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+# Cuándo ejecutar el flujo de trabajo
+on:
+  push:      # Al hacer push a las ramas especificadas
+    branches:
+      - 'main'
+      - 'develop'
+  pull_request:  # Al abrir un pull request en estas ramas
+    branches:
+      - 'main'
+      - 'develop'
+
+# Definición de los trabajos que debe ejecutar
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest   
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2  # Descarga el código del repositorio
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Define la versión de Python
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Get model
+        run:
+          python challenge/model.py
+
+      - name: Run model tests
+        run: |
+          make model-test
+
+      - name: Run API tests  
+        run: |
+          make api-test
