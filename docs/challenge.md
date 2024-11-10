@@ -18,7 +18,15 @@ Se realizó la transcripción optimizando la mayor parte del código y mantenien
 
 Pruebas unitarias superadas utilizando FastAPI. Fue necesario reemplazar la libreria pickle por joblib
 
+uvicorn challenge.api:app --reload
+http POST http://127.0.0.1:8000/predict flights:='[{\"OPERA\": \"Aerolineas Argentinas\", \"TIPOVUELO\": \"N\", \"MES\": 3}]'
+
 ## Parte 3
 
+Solución desplegada en GCP y pruebas de estres superadas.
+
+gcloud run deploy flight-delay-predictor --source . --region us-central1 --allow-unauthenticated
+
+Link solución en GCP: https://flight-delay-predictor-946976350004.us-central1.run.app
 
 ## Parte 4
